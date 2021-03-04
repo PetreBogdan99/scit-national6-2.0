@@ -1,5 +1,5 @@
 document
   .querySelector(".first-paragraph")
   .addEventListener("click", function () {
-    console.log("click");
+    console.log("click on paragraph");
   });
