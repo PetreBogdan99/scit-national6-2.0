@@ -19,7 +19,7 @@ document.getElementById("get-data").addEventListener("click", function () {
 
 // because "handleFetchResponse" is used as a callback function in the first then of "fetch" the parameter will be the response from the servers
 function handleFetchResponse(response) {
-  console.log("response", response);
+  //   console.log("response", response);
   // .json() is responsible for parsing in an asynchronous way the body of the server response, from a JSON string to a JavaScript value
   return response.json();
 }
@@ -27,10 +27,14 @@ function handleFetchResponse(response) {
 // because  "useJSONResponse" is used in the second then of "fetch" the parameter will be the actual JavaScript value parsed from the body of the server
 // only in this function we can actually use the data to render dynamically something
 function useJSONResponse(json) {
-  console.log(json);
+  //   console.log(json);
 
   // by calling "renderArticles" we will render to page the articles from the server
   renderArticles(json);
+}
+
+function useResponse(json) {
+  renderComments(json);
 }
 
 function renderArticles(articleList) {
@@ -41,8 +45,25 @@ function renderArticles(articleList) {
   // every object represents a article
   // every article has the same structure (id, title, content)
   for (const articleData of articleList) {
-    console.log(articleData);
+    // console.log(articleData);
     renderArticle(articleData);
+  }
+}
+
+function renderComment(commentData) {
+  const commentHtml = document.querySelector(".post-comment");
+  const content = document.createElement("p");
+  const username = document.createElement("h4");
+  commentHtml.appendChild(username);
+  commentHtml.appendChild(content);
+
+  username.innerHTML = commentData.username;
+  content.innerHTML = commentData.content;
+}
+
+function renderComments(commentsList) {
+  for (const comment of commentsList) {
+    renderComment(comment);
   }
 }
 
@@ -50,9 +71,19 @@ function renderArticle(articleData) {
   const article = document.createElement("div");
   const articleTitle = document.createElement("h3");
   const articleContent = document.createElement("p");
+  const commentContainer = document.createElement("div");
+
+  commentContainer.classList.add("post-comment");
 
   article.appendChild(articleTitle);
   article.appendChild(articleContent);
+  fetch(
+    `https://simple-json-server-scit.herokuapp.com/comments?postId=${articleData.id}`
+  )
+    .then(handleFetchResponse)
+    .then(useResponse);
+
+  article.appendChild(commentContainer);
 
   articleListHtml.appendChild(article);
 
