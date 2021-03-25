@@ -14,6 +14,7 @@ class Car {
   constructor(color) {
     this.color = color;
   }
+
   startCar() {
     console.log("Start Car");
   }
@@ -21,13 +22,13 @@ class Car {
 
 class CarWithElectricWindows extends Car {
   openElectricWindow(windowNr) {
-    console.log("Opening window", windowNr);
+    console.log("Opening window ", windowNr);
   }
 }
 
 const car1 = new Car("white");
 console.log(car1);
-
+// car1.openElectricWindow(2);
 const car2 = new CarWithElectricWindows("black");
 console.log(car2);
 car2.startCar();
@@ -39,8 +40,8 @@ class MyArray extends Array {
   }
 }
 
-const MyArray1 = new MyArray();
-MyArray1.push("abc");
-MyArray1.push("abcd");
-console.log(MyArray1);
-MyArray1.printLengthWithJoy();
+const myArray1 = new MyArray();
+myArray1.push("abc");
+myArray1.push("d");
+console.log(myArray1);
+myArray1.printLengthWithJoy();

@@ -4,6 +4,7 @@ body {
   height: 100%;
   margin: 0;
 }
+
 body {
   display: flex;
   align-items: center;
@@ -13,5 +14,7 @@ body {
 #game-scene {
   width: 1000px;
   height: 500px;
-  border: 1px solid gray;
+  border: 1px solid grey;
+  position: relative;
+  overflow: hidden;
 }
