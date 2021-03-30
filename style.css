@@ -1,0 +1,29 @@
+.spaceship {
+  width: 100px;
+}
+
+.spaceship--start {
+  animation: spaceAnimation 0.3 ease infinite;
+}
+
+@keyframes spaceAnimation {
+  0% {
+    transform: translateX(0px);
+  }
+
+  25% {
+    transform: translateX(2px);
+  }
+
+  50% {
+    transform: translateX(0px);
+  }
+
+  75% {
+    transform: translateX(-2px);
+  }
+
+  100% {
+    transform: translateX(-2px);
+  }
+}
