@@ -59,7 +59,6 @@ document.addEventListener("keydown", (event) => {
     keyRightPress = true;
   }
   if (event.key === "ArrowLeft") {
-    w;
     keyLeftPress = true;
   }
 });
