@@ -1,4 +1,4 @@
-console.log("OOP Game");
+console.log("OPP GAME - Adriana Lazar");
 
 class GameObject {
   constructor() {
@@ -36,31 +36,16 @@ class Player extends GameObject {
     super();
     this.ref.style.background = "blue";
     this.move(50, 225);
-    this.addLives(numberOfLives);
-    this.removeLife;
   }
 
   moveUp() {
-    this.move(this.x, this.y - 25);
+    if (this.y - 25 >= 0) this.move(this.x, this.y - 25);
+    console.log(this.y);
   }
 
   moveDown() {
-    this.move(this.x, this.y + 25);
-  }
-  addLives(numberOfLives) {
-    let livesDivision = document.getElementById("player-lives");
-    for (let i = 0; i < numberOfLives; i++) {
-      const lifeRef = document.createElement("div");
-      const lifeImg = document.createElement("img");
-      lifeImg.setAttribute("src", "img/heart.png");
-      lifeImg.classList.add("icon-lives");
-      lifeRef.appendChild(lifeImg);
-      livesDivision.appendChild(lifeRef);
-      this.lives.push(lifeRef);
-    }
-  }
-  removeLife() {
-    this.lives.pop().remove();
+    if (this.y + 25 <= 500 - this.height) this.move(this.x, this.y + 25);
+    console.log(this.y);
   }
 }
 
@@ -129,21 +114,21 @@ document.addEventListener("keyup", (event) => {
   }
 });
 
-/// --- User  input
-
 // -- Collision Detection
 
 function collisionDetection(player, obstacles) {
   for (const obstacle of obstacles) {
-    console.log(player.x, player.x + player.width, obstacle.x);
-
     if (
-      player.x <= obstacle.x &&
-      obstacle.x <= player.x + player.width &&
-      player.y <= obstacle.y &&
-      obstacle.y <= player.y + player.height
-    )
+      player.x < obstacle.x + obstacle.width &&
+      player.x + player.width > obstacle.x &&
+      player.y < obstacle.y + obstacle.height &&
+      player.y + player.height > obstacle.y
+    ) {
+      delete obstacle.width;
+      delete obstacle.height;
+      obstacle.removeRef();
       return true;
+    }
   }
 
   return false;
@@ -152,12 +137,17 @@ function collisionDetection(player, obstacles) {
 const player = new Player();
 const obstacleFactory = new ObstacleFactory();
 
-// Game Loop
+const life1 = document.getElementById("h1");
+const life2 = document.getElementById("h2");
+const life3 = document.getElementById("h3");
+
+const lives = [life1, life2, life3];
+
 let count = 0;
 
-let gameLoop = setInterval(() => {
-  console.log(keyUpPress);
+// Game Loop
 
+let gameLoop = setInterval(() => {
   if (keyUpPress) player.moveUp();
   if (keyDownPress) player.moveDown();
 
@@ -165,11 +155,16 @@ let gameLoop = setInterval(() => {
 
   obstacleFactory.moveObstacles();
   if (collisionDetection(player, obstacleFactory.obstacles)) {
-    clearInterval(gameLoop);
-    alert("You hit an obstacle");
+    lives[lives.length - 1].style.display = "none";
+    lives.pop();
+  }
 
+  if (lives.length === 0) {
+    alert("You lost!");
+    clearInterval(gameLoop);
     window.location = "/";
   }
+
   obstacleFactory.destroyObstacles();
   count++;
 }, 50);

@@ -8,40 +8,23 @@ body {
 body {
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  justify-content: center;
 }
 
 #game-scene {
   width: 1000px;
   height: 500px;
-  border: 1px solid grey;
+  border: 1px solid gray;
   position: relative;
   overflow: hidden;
 }
-
-#game-board {
-  display: block;
-  flex-wrap: wrap;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
+.lives {
+  position: absolute;
+  top: 0;
+  margin-top: 40px;
 }
 
-.icon-lives {
-  width: 30px;
+img {
   height: 30px;
-}
-
-#start {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
-}
-#player-lives {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  width: 30px;
 }
