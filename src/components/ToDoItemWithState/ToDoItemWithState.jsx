@@ -7,17 +7,17 @@ export class ToDoItemWithState extends Component {
 
   handleIncreaseClick = () => {
     console.log("click on item");
-    this.setState({ nrOfClick: 1 });
+    this.setState({ nrOfClick: this.state.nrOfClick + 1 });
   };
 
   render() {
     return (
       <div className="to-do-item" onClick={this.handleIncreaseClick}>
         <input type="checkbox" defaultChecked={this.props.checkValue} />
-        <p>{this.props.value}</p>
+        <p>{this.props.label}</p>
         <img
-          src="https://www.flaticon.com/svg/vstatic/svg/2496/2496733.svg?token=exp=1618938215~hmac=f2a28c5a10666b96b08bcbef0548421d"
-          alt="trash can"
+          src="https://previews.123rf.com/images/iconscart/iconscart1903/iconscart190300018/118811393-trash-icon.jpg"
+          alt="trash"
         />
         <p>{this.state.nrOfClick}</p>
       </div>
