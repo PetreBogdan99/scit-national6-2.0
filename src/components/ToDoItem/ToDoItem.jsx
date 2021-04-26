@@ -1,14 +1,16 @@
 import "./ToDoItem.css";
 
 export function ToDoItem(props) {
-  console.log(props);
+  // console.log(props);
+
   return (
     <div className="to-do-item">
       <input type="checkbox" defaultChecked={props.checkValue} />
-      <p>{props.value}</p>
+      <p>{props.label}</p>
       <img
-        src="https://www.flaticon.com/svg/vstatic/svg/2496/2496733.svg?token=exp=1618938215~hmac=f2a28c5a10666b96b08bcbef0548421d"
-        alt="trash can"
+        src="https://previews.123rf.com/images/iconscart/iconscart1903/iconscart190300018/118811393-trash-icon.jpg"
+        alt="trash"
+        onClick={(event) => props.removeItem(props.label)}
       />
     </div>
   );
